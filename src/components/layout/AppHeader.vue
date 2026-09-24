@@ -9,12 +9,16 @@ import { RouterLink } from 'vue-router';
                 ARCHIVE_00
             </RouterLink>
             <ul>
-                <RouterLink to="/">
-                    EXPLORE
-                </RouterLink>
-                <RouterLink to="/login">
-                    <img src="" alt="">
-                </RouterLink>
+                <li>
+                    <RouterLink to="/">
+                        EXPLORE
+                    </RouterLink>
+                </li>
+                <li>
+                    <RouterLink to="/login">
+                        <img src="" alt="">
+                    </RouterLink>
+                </li>
             </ul>
         </nav>
     </header>
