@@ -13,11 +13,12 @@ const router = createRouter({
 
 describe('AppHeader', () => {
   it('renders the logo', () => {
-    const wrapper = mount(AppHeader, {
-      global: {
-        plugins: [router],
-      },
-    })
+    const wrapper = mount(AppHeader, { global: { plugins: [router] } })
     expect(wrapper.text()).toContain('ARCHIVE_00')
+  })
+  it('renders the navigation links', () => {
+    const wrapper = mount(AppHeader, { global: { plugins: [router] } })
+    expect(wrapper.text()).toContain('EXPLORE')
+    expect(wrapper.text()).toContain('PROFILE')
   })
 })
