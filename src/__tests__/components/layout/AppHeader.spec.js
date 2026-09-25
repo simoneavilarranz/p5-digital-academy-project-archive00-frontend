@@ -21,4 +21,9 @@ describe('AppHeader', () => {
     expect(wrapper.text()).toContain('EXPLORE')
     expect(wrapper.text()).toContain('PROFILE')
   })
+  it('renders three router links', () => {
+    const wrapper = mount(AppHeader, { global: { plugins: [router] } })
+    const links = wrapper.findAll('a')
+    expect(links).toHaveLength(3)
+  })
 })
