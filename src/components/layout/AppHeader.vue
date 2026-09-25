@@ -3,8 +3,8 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-    <header>
-        <nav>
+    <header class="w-full bg-white border-b border-black">
+        <nav class="mx-auto flex items-center justify-between px-6 py-4">
             <RouterLink to="/">
                 ARCHIVE_00
             </RouterLink>
