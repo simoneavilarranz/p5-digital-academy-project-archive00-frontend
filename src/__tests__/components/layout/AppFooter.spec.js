@@ -16,4 +16,8 @@ describe('AppFooter', () => {
     const wrapper = mount(AppFooter, { global: { plugins: [router] } })
     expect(wrapper.text()).toContain('ARCHIVE_00')
   })
+  it('renders the github link', () => {
+    const wrapper = mount(AppFooter, { global: { plugins: [router] } })
+    expect(wrapper.text()).toContain('GITHUB')
+  })
 })
