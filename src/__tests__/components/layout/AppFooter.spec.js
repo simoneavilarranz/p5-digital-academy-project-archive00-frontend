@@ -29,9 +29,10 @@ describe('AppFooter', () => {
     const wrapper = mount(AppFooter, { global: { plugins: [router] } })
     expect(wrapper.findAll('a')).toHaveLength(2)
   })
-  it('github link has correct href', () => {
+  it('links have correct hrefs', () => {
     const wrapper = mount(AppFooter, { global: { plugins: [router] } })
-    const externalLink = wrapper.find('a[target="_blank"]')
-    expect(externalLink.attributes('href')).toBe('https://github.com/simoneavilarranz')
+    const links = wrapper.findAll('a')
+    expect(links[0].attributes('href')).toBe('/')
+    expect(links[1].attributes('href')).toBe('https://github.com/simoneavilarranz')
   })
 })
