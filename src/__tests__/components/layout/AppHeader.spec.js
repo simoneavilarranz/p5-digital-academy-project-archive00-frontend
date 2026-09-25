@@ -26,4 +26,11 @@ describe('AppHeader', () => {
     const links = wrapper.findAll('a')
     expect(links).toHaveLength(3)
   })
+  it('router links have correct href', () => {
+    const wrapper = mount(AppHeader, { global: { plugins: [router] } })
+    const links = wrapper.findAll('a')
+    expect(links[0].attributes('href')).toBe('/')
+    expect(links[1].attributes('href')).toBe('/')
+    expect(links[2].attributes('href')).toBe('/login')
+  })
 })
