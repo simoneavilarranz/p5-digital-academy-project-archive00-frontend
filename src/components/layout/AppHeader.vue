@@ -4,21 +4,21 @@ import { RouterLink } from 'vue-router';
 
 <template>
     <header class="w-full bg-white border-b border-black">
-        <nav class="mx-auto flex items-center justify-between px-6 py-4">
-            <RouterLink class="font-bold text-blue text-3xl hover:underline underline-offset-2" to="/">
+        <nav class="mx-auto flex items-center justify-between px-4 py-3 md:px-6 md:py-4">
+            <RouterLink class="font-bold text-blue text-2xl md:text-3xl hover:underline underline-offset-2" to="/">
                 ARCHIVE_00
             </RouterLink>
-            <ul class="flex gap-6 m-0 p-0">
+            <ul class="flex gap-2 md:gap-6 m-0 p-0">
                 <li>
                     <RouterLink
-                        class="border border-black bg-white px-4 py-2 hover:bg-blue hover:text-white transition-colors text-sm font-medium"
+                        class="border border-black bg-white px-3 py-1.5 text-xs md:px-4 md:py-2 md:text-sm hover:bg-blue hover:text-white transition-colors font-medium"
                         to="/">
                         EXPLORE
                     </RouterLink>
                 </li>
                 <li>
                     <RouterLink
-                        class="border border-black bg-white px-4 py-2 hover:bg-blue hover:text-white transition-colors text-sm font-medium"
+                        class="border border-black bg-white px-3 py-1.5 text-xs md:px-4 md:py-2 md:text-sm hover:bg-blue hover:text-white transition-colors font-medium"
                         to="/login">
                         PROFILE
                     </RouterLink>
