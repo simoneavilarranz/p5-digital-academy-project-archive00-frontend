@@ -9,7 +9,7 @@ const route = useRoute()
 <template>
   <AppHeader v-if="!route.meta.hideHeader" />
   <RouterView />
-  <AppFooter />
+  <AppFooter v-if="!route.meta.hideHeader" />
 </template>
 
 <style scoped></style>
