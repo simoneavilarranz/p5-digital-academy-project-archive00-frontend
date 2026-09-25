@@ -11,7 +11,7 @@ const currentYear = new Date().getFullYear()
                 ARCHIVE_00
             </RouterLink>
             <p class="text-xs text-gray-500 md:text-sm">
-                © {{ currentYear }} Archive_00. All rights reserved.
+                © {{ currentYear }} Archive_00
             </p>
             <a href="https://github.com/simoneavilarranz" target="_blank" rel="noopener"
                 class="font-medium text-black text-sm md:text-base hover:underline underline-offset-2">
