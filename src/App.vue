@@ -1,11 +1,12 @@
 <script setup>
 import AppHeader from './components/layout/AppHeader.vue';
-import { RouterView } from 'vue-router';
+import { RouterView, useRoute } from 'vue-router';
 
+const route = useRoute()
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader v-if="!route.meta.hideHeader" />
   <RouterView />
 </template>
 
