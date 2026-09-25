@@ -7,9 +7,13 @@ const route = useRoute()
 </script>
 
 <template>
-  <AppHeader v-if="!route.meta.hideHeader" />
-  <RouterView />
-  <AppFooter v-if="!route.meta.hideHeader" />
+  <div class="flex min-h-screen flex-col">
+    <AppHeader v-if="!route.meta.hideHeader" />
+    <main class="flex-1">
+      <RouterView />
+    </main>
+    <AppFooter v-if="!route.meta.hideFooter" />
+  </div>
 </template>
 
 <style scoped></style>
