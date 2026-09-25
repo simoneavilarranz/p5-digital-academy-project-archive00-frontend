@@ -11,7 +11,8 @@ import { RouterLink } from 'vue-router';
             <p>
 
             </p>
-            <a href="https://github.com/simoneavilarranz" target="_blank" rel="noopener">
+            <a href="https://github.com/simoneavilarranz" target="_blank" rel="noopener"
+                class="font-medium text-black text-sm md:text-base hover:underline underline-offset-2">
                 [ GITHUB ]
             </a>
         </div>
