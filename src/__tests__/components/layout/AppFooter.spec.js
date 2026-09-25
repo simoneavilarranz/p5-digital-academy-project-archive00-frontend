@@ -25,4 +25,8 @@ describe('AppFooter', () => {
     const currentYear = new Date().getFullYear()
     expect(wrapper.text()).toContain(String(currentYear))
   })
+  it('renders both links', () => {
+    const wrapper = mount(AppFooter, { global: { plugins: [router] } })
+    expect(wrapper.findAll('a')).toHaveLength(2)
+  })
 })
