@@ -20,4 +20,9 @@ describe('AppFooter', () => {
     const wrapper = mount(AppFooter, { global: { plugins: [router] } })
     expect(wrapper.text()).toContain('GITHUB')
   })
+  it('renders the copyright with the current year', () => {
+    const wrapper = mount(AppFooter, { global: { plugins: [router] } })
+    const currentYear = new Date().getFullYear()
+    expect(wrapper.text()).toContain(String(currentYear))
+  })
 })
