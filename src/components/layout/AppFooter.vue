@@ -10,7 +10,7 @@ const currentYear = new Date().getFullYear()
             <RouterLink class="font-medium text-black text-sm md:text-base hover:underline underline-offset-2" to="/">
                 ARCHIVE_00
             </RouterLink>
-            <p>
+            <p class="text-xs text-gray-500 md:text-sm">
                 © {{ currentYear }} Archive_00. All rights reserved.
             </p>
             <a href="https://github.com/simoneavilarranz" target="_blank" rel="noopener"
