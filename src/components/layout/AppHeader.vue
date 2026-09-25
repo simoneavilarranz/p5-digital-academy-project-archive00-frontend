@@ -16,7 +16,7 @@ import { RouterLink } from 'vue-router';
                 </li>
                 <li>
                     <RouterLink to="/login">
-                        <img src="" alt="">
+                        PERFIL
                     </RouterLink>
                 </li>
             </ul>
