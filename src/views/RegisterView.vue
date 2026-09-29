@@ -29,10 +29,13 @@ async function handleSubmit() {
             <h1>REGISTER</h1>
             <p>Create an account to join the ARCHIVE_00 community.</p>
             <form action="">
-                <FormInput></FormInput>
-                <FormInput></FormInput>
-                <PasswordInput></PasswordInput>
-                <PasswordInput></PasswordInput>
+                <FormInput id="username" label="Username" v-model="form.username" placeholder="Enter a username">
+                </FormInput>
+                <FormInput id="email" label="Email" type="email" v-model="form.email" placeholder="example@archive.com">
+                </FormInput>
+                <PasswordInput id="password" label="Password" v-model="form.password"></PasswordInput>
+                <PasswordInput id="confirmPassword" label="Confirm Password" v-model="form.confirmPassword">
+                </PasswordInput>
                 <p v-if="error">{{ error }}</p>
                 <button type="submit">CREATE ACCOUNT</button>
             </form>
