@@ -17,10 +17,20 @@ const error = ref('')
 const router = useRouter()
 
 async function handleSubmit() {
-    error.value = '';
+    error.value = ''
     if (form.value.password !== form.value.confirmPassword) {
         error.value = 'Passwords do not match'
         return
+    }
+    try {
+        await authService.register({
+            username: form.value.username,
+            email: form.value.email,
+            password: form.value.password,
+        })
+        router.push('/login')
+    } catch (err) {
+        error.value = err.response?.data?.message || 'Something went wrong'
     }
 }
 
