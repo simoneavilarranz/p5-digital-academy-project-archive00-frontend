@@ -2,7 +2,7 @@
 import FormInput from '@/components/common/FormInput.vue';
 import PasswordInput from '@/components/common/PasswordInput.vue';
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, RouterLink } from 'vue-router';
 
 
 const form = ref({
@@ -23,21 +23,19 @@ async function handleSubmit() {
 </script>
 
 <template>
-    <div>
-        <div>
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="w-full max-w-md border border-black shadow-lg p-8 md:p-10">
             <p>ARCHIVE_00</p>
             <h1>REGISTER</h1>
             <p>Create an account to join the ARCHIVE_00 community.</p>
-            <form action="">
-                <FormInput id="username" label="Username" v-model="form.username" placeholder="Enter a username">
-                </FormInput>
-                <FormInput id="email" label="Email" type="email" v-model="form.email" placeholder="example@archive.com">
-                </FormInput>
-                <PasswordInput id="password" label="Password" v-model="form.password"></PasswordInput>
-                <PasswordInput id="confirmPassword" label="Confirm Password" v-model="form.confirmPassword">
-                </PasswordInput>
+            <form @submit.prevent="handleSubmit">
+                <FormInput id="username" label="Username" v-model="form.username" placeholder="Enter a username" />
+                <FormInput id="email" label="Email" type="email" v-model="form.email"
+                    placeholder="example@archive.com" />
+                <PasswordInput id="password" label="Password" v-model="form.password" />
+                <PasswordInput id="confirmPassword" label="Confirm Password" v-model="form.confirmPassword" />
                 <p v-if="error">{{ error }}</p>
-                <button type="submit">CREATE ACCOUNT</button>
+                <button type="submit">CREATE ACCOUNT →</button>
             </form>
             <p>Already have an account? <RouterLink to="/login">LOG IN</RouterLink>
             </p>
