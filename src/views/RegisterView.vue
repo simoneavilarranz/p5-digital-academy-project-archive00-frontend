@@ -3,7 +3,7 @@ import FormInput from '@/components/common/FormInput.vue';
 import PasswordInput from '@/components/common/PasswordInput.vue';
 import { ref } from 'vue';
 import { useRouter, RouterLink } from 'vue-router';
-
+import { authService } from '@/services/authService';
 
 const form = ref({
     username: '',
@@ -17,7 +17,11 @@ const error = ref('')
 const router = useRouter()
 
 async function handleSubmit() {
-
+    error.value = '';
+    if (form.value.password !== form.value.confirmPassword) {
+        error.value = 'Passwords do not match'
+        return
+    }
 }
 
 </script>
