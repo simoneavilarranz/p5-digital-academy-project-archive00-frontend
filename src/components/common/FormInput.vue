@@ -8,4 +8,6 @@ const props = defineProps({
     id: { type: String, required: true },
 })
 
+defineEmits(['update:modelValue'])
+
 </script>
