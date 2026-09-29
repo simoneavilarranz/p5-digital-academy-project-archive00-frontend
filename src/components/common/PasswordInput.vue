@@ -22,6 +22,10 @@ const showPassword = ref(false)
             <input :id="id" :type="showPassword ? 'text' : 'password'" :value="modelValue" :placeholder="placeholder"
                 class="w-full border border-black bg-white px-3 py-2 text-sm focus:outline-none focus:border-blue placeholder-gray-400"
                 @input="$emit('update:modelValue', $event.target.value)" />
+            <button type="button" @click="showPassword = !showPassword"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-black hover:text-blue">
+                {{ showPassword ? 'HIDE' : 'SHOW' }}
+            </button>
         </div>
     </div>
 </template>
