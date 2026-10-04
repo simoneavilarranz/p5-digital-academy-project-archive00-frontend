@@ -1,6 +1,6 @@
 import FormInput from '@/components/common/FormInput.vue'
 import { mount } from '@vue/test-utils'
-import { beforeEach, describe } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('FormInput', () => {
   let wrapper
@@ -13,5 +13,13 @@ describe('FormInput', () => {
         modelValue: '',
       },
     })
+  })
+
+  it('renders the label', () => {
+    expect(wrapper.text()).toContain('Username')
+  })
+
+  it('renders the input', () => {
+    expect(wrapper.find('input').exists()).toBe(true)
   })
 })
