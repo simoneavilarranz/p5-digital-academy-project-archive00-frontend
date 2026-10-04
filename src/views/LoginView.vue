@@ -39,6 +39,7 @@ async function handleSubmit() {
 <template>
     <div class="min-h-screen flex items-center justify-center px-4">
         <div class="w-full max-w-md border border-black shadow-lg p-8 md:p-10">
+            <RouterLink to="/" class="hover:underline underline-offset-2">← RETURN</RouterLink>
             <p class="text-blue text-center text-lg font-bold mb-1">ARCHIVE_00</p>
             <h1 class="text-blue text-center text-3xl md:text-5xl font-bold mb-2">LOGIN</h1>
             <p class="text-center text-sm text-gray-500 mb-6">Access your ARCHIVE_00 account.</p>
