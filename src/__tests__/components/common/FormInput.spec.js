@@ -22,4 +22,9 @@ describe('FormInput', () => {
   it('renders the input', () => {
     expect(wrapper.find('input').exists()).toBe(true)
   })
+
+  it('emits update:modelValue on input', async () => {
+    await wrapper.find('input').setValue('newvalue')
+    expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+  })
 })
