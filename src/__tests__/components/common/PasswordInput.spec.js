@@ -23,4 +23,10 @@ describe('PasswordInput', () => {
     const input = wrapper.find('input')
     expect(input.attributes('type')).toBe('password')
   })
+
+  it('emits update:modelValue on input', async () => {
+    await wrapper.find('input').setValue('newpassword')
+    expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+    expect(wrapper.emitted('update:modelValue')[0]).toEqual(['newpassword'])
+  })
 })
