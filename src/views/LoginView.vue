@@ -15,6 +15,25 @@ const error = ref('')
 
 const router = useRouter()
 const authStore = useAuthStore()
+
+async function handleSubmit() {
+    error.value = ''
+
+    try {
+        const response = await authService.login({
+            email: form.value.email,
+            password: form.value.password,
+        })
+
+        authStore.setAuth(response.data.token, {
+            email: form.value.email,
+        })
+
+        router.push('/')
+    } catch (err) {
+        error.value = err.response?.data?.message || 'Something went wrong'
+    }
+}
 </script>
 
 <template>
