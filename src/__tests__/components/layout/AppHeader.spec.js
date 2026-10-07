@@ -1,4 +1,5 @@
 import AppHeader from '@/components/layout/AppHeader.vue'
+import { createTestingPinia } from '@pinia/testing'
 import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { createMemoryHistory, createRouter } from 'vue-router'
@@ -15,7 +16,18 @@ describe('AppHeader', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mount(AppHeader, { global: { plugins: [router] } })
+    wrapper = mount(AppHeader, {
+      global: {
+        plugins: [
+          router,
+          createTestingPinia({
+            initialState: {
+              auth: { token: '', user: null },
+            },
+          }),
+        ],
+      },
+    })
   })
 
   it('renders the logo', () => {
@@ -38,4 +50,21 @@ describe('AppHeader', () => {
     expect(links[1].attributes('href')).toBe('/')
     expect(links[2].attributes('href')).toBe('/login')
   })
+
+  it('shows profile and logout when authenticated', () => {
+    const wrapper = mount(AppHeader, {
+      global: {
+        plugins: [
+          router,
+          createTestingPinia({
+            initialState: {
+              auth: { token: 'fake-token', user: { email: 'test@example.com' } },
+            },
+          }),
+        ],
+      },
+    })
+  })
+  expect(wrapper.text()).toContain('PROFILE')
+  expect(wrapper.text()).toContain('LOGOUT')
 })
