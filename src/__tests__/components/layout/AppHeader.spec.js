@@ -1,7 +1,7 @@
 import AppHeader from '@/components/layout/AppHeader.vue'
 import { createTestingPinia } from '@pinia/testing'
 import { mount } from '@vue/test-utils'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { createMemoryHistory, createRouter } from 'vue-router'
 
 const router = createRouter({
@@ -21,6 +21,7 @@ describe('AppHeader', () => {
         plugins: [
           router,
           createTestingPinia({
+            createSpy: vi.fn,
             initialState: {
               auth: { token: '', user: null },
             },
@@ -64,7 +65,12 @@ describe('AppHeader', () => {
         ],
       },
     })
+    expect(wrapper.text()).toContain('PROFILE')
+    expect(wrapper.text()).toContain('LOGOUT')
   })
-  expect(wrapper.text()).toContain('PROFILE')
-  expect(wrapper.text()).toContain('LOGOUT')
+
+  it('shows login when not authenticated', () => {
+    expect(wrapper.text()).toContain('LOGIN')
+    expect(wrapper.text()).not.toContain('LOGOUT')
+  })
 })
