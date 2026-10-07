@@ -1,8 +1,15 @@
 <script setup>
 import { useAuthStore } from '@/stores/authStore';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 
 const authStore = useAuthStore()
+
+const router = useRouter()
+
+function handleLogout() {
+    authStore.logout()
+    router.push('/')
+}
 </script>
 
 <template>
@@ -24,6 +31,12 @@ const authStore = useAuthStore()
                         class="border border-black bg-white px-3 py-1.5 text-xs md:px-4 md:py-2 md:text-sm font-medium hover:bg-blue hover:text-white active:bg-black active:text-white transition-colors">
                         {{ authStore.isAuthenticated ? 'PROFILE' : 'LOGIN' }}
                     </RouterLink>
+                </li>
+                <li v-if="authStore.isAuthenticated">
+                    <button @click="handleLogout"
+                        class="border border-black bg-white px-3 py-1.5 text-xs md:px-4 md:py-2 md:text-sm font-medium hover:bg-blue hover:text-white active:bg-black active:text-white transition-colors">
+                        LOGOUT
+                    </button>
                 </li>
             </ul>
         </nav>
