@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import('@/views/RegisterView.vue'),
       meta: { hideHeader: true, hideFooter: true },
     },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('@/views/ProfileView.vue'),
+    },
   ],
 })
 
