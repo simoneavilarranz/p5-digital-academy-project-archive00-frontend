@@ -1,4 +1,6 @@
 <script setup>
+import AlbumCard from '@/components/catalog/AlbumCard.vue';
+import ArtistCard from '@/components/catalog/ArtistCard.vue';
 import SearchBar from '@/components/catalog/SearchBar.vue';
 import { catalogService } from '@/services/catalogService';
 import { computed, ref } from 'vue';
@@ -53,4 +55,18 @@ const hasResults = computed(() => filteredResults.value.length > 0)
     <SearchBar v-model="query" placeholder="Start searching..." @submit="handleSearch" />
     <p v-if="loading">Searching...</p>
     <p v-if="error">{{ error }}</p>
+    <div v-else-if="results">
+        <div>
+            <button v-for="f in filters" :key="f.value" @click="filter = f.value">{{ f.label }}</button>
+        </div>
+        <div v-if="hasResults">
+            <template v-for="item in filteredResults">
+                <AlbumCard v-if="item.type === 'album'" :key="`album-${item.name}-${item.artist}`" :album="item" />
+                <ArtistCard v-else :key="`artist-${item.name}`" :artist="item" />
+            </template>
+        </div>
+        <p v-else>
+            No results found for "{{ searchTerm }}".
+        </p>
+    </div>
 </template>
