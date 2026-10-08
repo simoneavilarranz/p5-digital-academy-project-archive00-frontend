@@ -77,7 +77,7 @@ const hasResults = computed(() => filteredResults.value.length > 0)
                     </button>
                 </div>
 
-                <div v-if="hasResults" class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                <div v-if="hasResults" class="grid grid-cols-2 gap-0 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                     <template v-for="item in filteredResults">
                         <AlbumCard v-if="item.type === 'album'" :key="`album-${item.name}-${item.artist}`"
                             :album="item" />

@@ -17,11 +17,11 @@ function handleSubmit() {
 }
 </script>
 <template>
-    <form @submit.prevent="handleSubmit" class="flex gap-2">
+    <form @submit.prevent="handleSubmit" class="flex gap-0 mx-auto max-w-2xl">
         <input :value="modelValue" :placeholder="placeholder" @input="handleInput"
             class="flex-1 border border-black bg-white px-4 py-3 text-sm focus:outline-none focus:border-blue placeholder-gray-400" />
         <button type="submit"
-            class="bg-blue text-white px-6 py-3 text-sm font-bold uppercase hover:bg-black transition-colors">
+            class="bg-black text-white px-6 py-3 text-sm font-bold uppercase border border-black hover:bg-blue active:bg-black transition-colors">
             SEARCH
         </button>
     </form>
