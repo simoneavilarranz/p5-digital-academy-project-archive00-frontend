@@ -21,7 +21,7 @@ async function handleSearch() {
         results.value = response.data
         searchTerm.value = query.value
     } catch (err) {
-        error.value = 'Error searching. Please try again.'
+        error.value = err.response?.data?.message || 'Error searching. Please try again.'
         results.value = null
     } finally {
         loading.value = false
@@ -50,23 +50,45 @@ const filteredResults = computed(() => {
 const hasResults = computed(() => filteredResults.value.length > 0)
 </script>
 <template>
-    <h1>WELCOME TO ARCHIVE_00</h1>
-    <p>Search for albums and artists.</p>
-    <SearchBar v-model="query" placeholder="Start searching..." @submit="handleSearch" />
-    <p v-if="loading">Searching...</p>
-    <p v-if="error">{{ error }}</p>
-    <div v-else-if="results">
-        <div>
-            <button v-for="f in filters" :key="f.value" @click="filter = f.value">{{ f.label }}</button>
+    <div class="min-h-screen bg-white px-4 py-8 md:px-6 md:py-12">
+        <div class="mx-auto max-w-7xl">
+            <h1 class="text-blue text-3xl md:text-5xl font-bold mb-2 text-center">WELCOME TO ARCHIVE_00</h1>
+            <p class="text-sm text-gray-500 mb-8 text-center">Search for albums and artists.</p>
+
+            <SearchBar v-model="query" placeholder="Start searching..." @submit="handleSearch" />
+
+            <p v-if="loading" class="mt-8 text-center text-sm text-gray-500">
+                Searching...
+            </p>
+
+            <p v-else-if="error" class="mt-8 text-center text-sm text-red-600">
+                {{ error }}
+            </p>
+
+            <div v-else-if="results" class="mt-8">
+                <div class="flex justify-center gap-2 mb-8">
+                    <button v-for="f in filters" :key="f.value" @click="filter = f.value" :class="[
+                        'px-4 py-2 text-xs font-bold uppercase tracking-wide border border-black transition-colors',
+                        filter === f.value
+                            ? 'bg-black text-white'
+                            : 'bg-white text-black hover:bg-blue hover:text-white hover:border-blue',
+                    ]">
+                        {{ f.label }}
+                    </button>
+                </div>
+
+                <div v-if="hasResults" class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                    <template v-for="item in filteredResults">
+                        <AlbumCard v-if="item.type === 'album'" :key="`album-${item.name}-${item.artist}`"
+                            :album="item" />
+                        <ArtistCard v-else :key="`artist-${item.name}`" :artist="item" />
+                    </template>
+                </div>
+
+                <p v-else class="text-center text-sm text-gray-500 mt-8">
+                    No results found for "{{ searchTerm }}".
+                </p>
+            </div>
         </div>
-        <div v-if="hasResults">
-            <template v-for="item in filteredResults">
-                <AlbumCard v-if="item.type === 'album'" :key="`album-${item.name}-${item.artist}`" :album="item" />
-                <ArtistCard v-else :key="`artist-${item.name}`" :artist="item" />
-            </template>
-        </div>
-        <p v-else>
-            No results found for "{{ searchTerm }}".
-        </p>
     </div>
 </template>
