@@ -45,7 +45,7 @@ describe('TrackList', () => {
   })
 
   it('renders the correct number of tracks', () => {
-    const rows = wrapper.findAll('div > div')
+    const rows = wrapper.findAll('.track-row')
     expect(rows).toHaveLength(3)
   })
 })
