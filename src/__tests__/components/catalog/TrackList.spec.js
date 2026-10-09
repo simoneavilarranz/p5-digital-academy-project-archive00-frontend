@@ -28,4 +28,24 @@ describe('TrackList', () => {
     expect(wrapper.text()).toContain('6:24')
     expect(wrapper.text()).toContain('4:27')
   })
+
+  it('formats the position with leading zeros', () => {
+    expect(wrapper.text()).toContain('01')
+    expect(wrapper.text()).toContain('02')
+    expect(wrapper.text()).toContain('03')
+  })
+
+  it('handles missing or zero duration', () => {
+    const wrapperNoDuration = mount(TrackList, {
+      props: {
+        tracks: [{ name: 'Test', duration: 0, position: 1 }],
+      },
+    })
+    expect(wrapperNoDuration.text()).toContain('0:00')
+  })
+
+  it('renders the correct number of tracks', () => {
+    const rows = wrapper.findAll('div > div')
+    expect(rows).toHaveLength(3)
+  })
 })
