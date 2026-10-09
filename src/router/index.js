@@ -30,6 +30,11 @@ const router = createRouter({
       name: 'album-detail',
       component: () => import('@/views/AlbumDetailView.vue'),
     },
+    {
+      path: '/artist/:name',
+      name: 'artist-detail',
+      component: () => import('@/views/ArtistDetailView.vue'),
+    },
   ],
 })
 
