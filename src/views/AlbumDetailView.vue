@@ -23,7 +23,7 @@ onMounted(async () => {
 })
 </script>
 <template>
-    <div class="min-h-screen bg-white px-4 py-4 md:px-8 md:py-8">
+    <div class="min-h-screen bg-white px-6 py-6 md:px-8 md:py-8">
         <p v-if="loading" class="text-center text-sm text-gray-500">Loading...</p>
         <p v-else-if="error" class="text-center text-sm text-red-600">{{ error }}</p>
         <div v-else-if="album" class="grid grid-cols-1 gap-8 md:grid-cols-3">
