@@ -14,11 +14,13 @@ function formatDuration(seconds) {
 }
 </script>
 <template>
-    <div>
-        <div v-for="track in tracks" :key="track.position">
-            <span>{{ String(track.position).padStart(2, '0') }}</span>
-            <span>{{ track.name }}</span>
-            <span>{{ formatDuration(track.duration) }}</span>
+    <div class="border border-black">
+        <div v-for="track in tracks" :key="track.position"
+            class="flex items-center gap-4 px-4 py-3 border-b border-black last:border-b-0">
+            <span class="text-xs text-gray-500 font-mono w-8 shrink-0">
+                {{ String(track.position).padStart(2, '0') }}</span>
+            <span class="flex-1 text-sm truncate">{{ track.name }}</span>
+            <span class="text-xs text-gray-500 font-mono shrink-0">{{ formatDuration(track.duration) }}</span>
         </div>
     </div>
 </template>
