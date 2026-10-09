@@ -13,3 +13,12 @@ function formatDuration(seconds) {
     return `${minutes}:${secs.toString().padStart(2, '0')}`
 }
 </script>
+<template>
+    <div>
+        <div v-for="track in tracks" :key="track.position">
+            <span>{{ String(track.position).padStart(2, '0') }}</span>
+            <span>{{ track.name }}</span>
+            <span>{{ formatDuration(track.duration) }}</span>
+        </div>
+    </div>
+</template>
