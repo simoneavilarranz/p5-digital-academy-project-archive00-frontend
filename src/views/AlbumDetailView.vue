@@ -3,7 +3,7 @@ import { catalogService } from '@/services/catalogService';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-const route = useRoute
+const route = useRoute()
 const album = ref(null)
 const loading = ref(true)
 const error = ref('')
