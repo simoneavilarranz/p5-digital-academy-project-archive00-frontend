@@ -112,5 +112,22 @@ async function archiveAlbum() {
                 <TrackList :tracks="album.tracks" />
             </div>
         </div>
+        <div v-if="showRatingModal" @click.self="showRatingModal = false">
+            <div>
+                <h3>Rate this album</h3>
+                <div>
+                    <button v-for="n in 5" :key="n" @click="selectedRating = n">
+                        ★
+                    </button>
+                </div>
+                <div>
+                    <button @click="showRatingModal = false">Cancel
+                    </button>
+                    <button @click="saveAlbum" :disabled="selectedRating < 1 || saving">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
