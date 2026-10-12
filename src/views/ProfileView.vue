@@ -1,6 +1,5 @@
 <script setup>
 import CollectionItem from '@/components/collection/CollectionItem.vue'
-import { RouterLink } from 'vue-router'
 import { collectionService } from '@/services/collectionService'
 import { userService } from '@/services/userService'
 import { computed, onMounted, ref } from 'vue'
@@ -58,10 +57,6 @@ async function removeItem(id) {
                 </div>
                 <h1 class="text-blue text-2xl font-bold mb-2">{{ user.username }}</h1>
                 <p class="text-lg text-gray-500 mb-4">{{ user.email }}</p>
-                <RouterLink to="/settings"
-                    class="block text-center border border-black bg-white px-4 py-2 text-md font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors mb-6">
-                    Settings
-                </RouterLink>
                 <div class="grid grid-cols-2 gap-2">
                     <div class="border border-black p-3">
                         <p class="text-sm text-gray-500 uppercase tracking-wide mb-1">Collection</p>
