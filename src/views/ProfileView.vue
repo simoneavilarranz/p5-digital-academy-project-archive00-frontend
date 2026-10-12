@@ -36,52 +36,53 @@ onMounted(async () => {
 })
 </script>
 <template>
-    <div>
-        <p v-if="loading">Loading...</p>
-        <p v-else-if="error">{{ error }}</p>
-        <div v-else-if="user">
-            <div>
-                <div></div>
-                <h1>{{ user.username }}</h1>
-                <p>{{ user.email }}</p>
-                <RouterLink to="/settings">
+    <div class="min-h-screen bg-white px-4 py-4 md:px-6 md:py-6">
+        <p v-if="loading" class="text-center text-sm text-gray-500">Loading...</p>
+        <p v-else-if="error" class="text-center text-sm text-red-600">{{ error }}</p>
+        <div v-else-if="user" class="mx-auto grid grid-cols-1 gap-6 md:grid-cols-5">
+            <div class="md:col-span-1">
+                <div class="w-32 h-32 border border-black bg-gray-medium mb-4"></div>
+                <h1 class="text-blue text-2xl font-bold mb-2">{{ user.username }}</h1>
+                <p class="text-sm text-gray-500 mb-4">{{ user.email }}</p>
+                <RouterLink to="/settings"
+                    class="block text-center border border-black bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors mb-6">
                     Settings
                 </RouterLink>
-                <div>
-                    <div>
-                        <p>Collection</p>
-                        <p>{{ savedItems.length }}</p>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="border border-black p-3">
+                        <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Collection</p>
+                        <p class="text-lg font-bold">{{ savedItems.length }}</p>
                     </div>
-                    <div>
-                        <p>Archive</p>
-                        <p>{{ archivedItems.length }}</p>
+                    <div class="border border-black p-3">
+                        <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Archive</p>
+                        <p class="text-lg font-bold">{{ archivedItems.length }}</p>
                     </div>
                 </div>
             </div>
-            <div>
-                <div>
-                    <h2>Collection</h2>
-                    <RouterLink to="/profile/collection">
+            <div class="md:col-span-2">
+                <div class="mb-4 pb-2 flex justify-between items-baseline">
+                    <h2 class="text-blue text-lg font-bold uppercase tracking-wide">Collection</h2>
+                    <RouterLink to="/profile/collection" class="text-xs text-gray-500 hover:text-blue">
                         View all →
                     </RouterLink>
                 </div>
 
-                <div v-if="latestSaved.length > 0">
+                <div v-if="latestSaved.length > 0" class="border-t border-l border-r border-black">
                     <CollectionItem v-for="item in latestSaved" :key="item.id" :item="item" />
                 </div>
-                <p v-else>No albums saved yet.</p>
+                <p v-else class="text-xs text-gray-500 py-4">No albums saved yet.</p>
             </div>
-            <div>
-                <div>
-                    <h2>Archive</h2>
-                    <RouterLink to="/profile/archive">
+            <div class="md:col-span-2">
+                <div class="mb-4 pb-2 flex justify-between items-baseline">
+                    <h2 class="text-blue text-lg font-bold uppercase tracking-wide">Archive</h2>
+                    <RouterLink to="/profile/archive" class="text-xs text-gray-500 hover:text-blue">
                         View all →
                     </RouterLink>
                 </div>
-                <div v-if="latestArchived.length > 0">
+                <div v-if="latestArchived.length > 0" class="border-t border-l border-r border-black">
                     <CollectionItem v-for="item in latestArchived" :key="item.id" :item="item" />
                 </div>
-                <p v-else>Archive is empty.</p>
+                <p v-else class="text-xs text-gray-500 py-4">Archive is empty.</p>
             </div>
         </div>
     </div>
