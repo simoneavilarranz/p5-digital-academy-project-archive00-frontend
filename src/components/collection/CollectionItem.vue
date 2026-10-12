@@ -19,7 +19,7 @@ defineProps({
                 {{ item.reviewText }}
             </p>
         </div>
-        <div v-if="item.rating" class="shrink-0 text-sm">
+        <div v-if="item.rating" class="shrink-0 text-md">
             <span v-for="n in 5" :key="n" :class="n <= item.rating ? 'text-blue' : 'text-gray-300'">
                 ★
             </span>
