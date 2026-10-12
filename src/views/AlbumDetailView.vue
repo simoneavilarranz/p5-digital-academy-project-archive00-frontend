@@ -5,6 +5,8 @@ import { collectionService } from '@/services/collectionService';
 import { useAuthStore } from '@/stores/authStore';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import addIcon from '../assets/addicon.svg'
+import archiveIcon from '../assets/archiveicon.svg'
 
 const route = useRoute()
 const album = ref(null)
@@ -85,6 +87,22 @@ async function archiveAlbum() {
         <div v-else-if="album" class="grid grid-cols-1 gap-8 md:grid-cols-3">
             <div class="md:col-span-1">
                 <img :src="album.imageUrl" :alt="album.name" class="w-full border border-black">
+                <div v-if="authStore.isAuthenticated">
+                    <button @click="showRatingModal = true" :disabled="saving">
+                        <img :src="addIcon" alt="">
+                        Save
+                    </button>
+                    <button @click="archiveAlbum" :disabled="saving">
+                        <img :src="archiveIcon" alt="">
+                        Archive
+                    </button>
+                </div>
+                <p v-if="message">
+                    {{ message }}
+                </p>
+                <p v-else>
+                    <RouterLink to="/login">Log in</RouterLink> to save albums.
+                </p>
             </div>
             <div class="md:col-span-2">
                 <h1 class="text-blue text-3xl md:text-5xl font-bold mb-2">{{ album.name }}</h1>
