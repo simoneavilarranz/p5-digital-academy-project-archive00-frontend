@@ -16,6 +16,7 @@ const error = ref('')
 const authStore = useAuthStore()
 const showRatingModal = ref(false)
 const selectedRating = ref(0)
+const reviewText = ref('')
 const saving = ref(false)
 const message = ref('')
 const savedItem = ref(null)
@@ -47,11 +48,13 @@ async function saveAlbum() {
             coverUrl: album.value.imageUrl,
             type: 'SAVED',
             rating: selectedRating.value,
+            reviewText: reviewText.value.trim() || null,
         })
         savedItem.value = response.data
         showRatingModal.value = false
         message.value = 'Album saved!'
         selectedRating.value = 0
+        reviewText.value = ''
     } catch (err) {
         message.value = err.response?.data?.message || 'Error saving album.'
     } finally {
