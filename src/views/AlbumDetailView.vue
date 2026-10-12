@@ -1,6 +1,7 @@
 <script setup>
 import TrackList from '@/components/catalog/TrackList.vue';
 import { catalogService } from '@/services/catalogService';
+import { useAuthStore } from '@/stores/authStore';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -8,6 +9,13 @@ const route = useRoute()
 const album = ref(null)
 const loading = ref(true)
 const error = ref('')
+
+const authStore = useAuthStore()
+const showRatingModal = ref(false)
+const selectedRating = ref(0)
+const saving = ref(false)
+const message = ref('')
+const savedItem = ref(null)
 
 onMounted(async () => {
     const { artist, album: albumName } = route.params
