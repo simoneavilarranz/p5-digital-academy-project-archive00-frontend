@@ -115,18 +115,35 @@ async function archiveAlbum() {
                 <TrackList :tracks="album.tracks" />
             </div>
         </div>
-        <div v-if="showRatingModal" @click.self="showRatingModal = false">
-            <div>
-                <h3>Rate this album</h3>
-                <div>
-                    <button v-for="n in 5" :key="n" @click="selectedRating = n">
+        <div v-if="showRatingModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            @click.self="showRatingModal = false">
+            <div class="bg-white border border-black p-8 max-w-md w-full mx-4">
+                <h3 class="text-blue text-xl font-bold mb-6 text-center">Rate this album</h3>
+                <div class="flex justify-center gap-2 mb-6">
+                    <button v-for="n in 5" :key="n" @click="selectedRating = n" :class="[
+                        'w-10 h-10 border border-black text-lg font-bold transition-colors',
+                        selectedRating >= n ? 'bg-blue text-white' : 'bg-white text-black hover:bg-gray-100',]">
                         ★
                     </button>
                 </div>
-                <div>
-                    <button @click="showRatingModal = false">Cancel
+                <div class="mb-6">
+                    <label for="review" class="block text-xs font-bold uppercase tracking-wide mb-2">
+                        Review (optional)
+                    </label>
+                    <textarea id="review" v-model="reviewText" rows="4" maxlength="1000"
+                        placeholder="Write your thoughts about this album..."
+                        class="w-full border border-black bg-white px-3 py-2 text-sm focus:outline-none focus:border-blue placeholder-gray-400 resize-none"></textarea>
+                    <p class="text-xs text-gray-500 mt-1 text-right">
+                        {{ reviewText.length }} / 1000
+                    </p>
+                </div>
+                <div class="flex gap-2">
+                    <button @click="showRatingModal = false"
+                        class="flex-1 border border-black bg-white px-4 py-2 text-sm font-bold uppercase hover:bg-black hover:text-white transition-colors">
+                        Cancel
                     </button>
-                    <button @click="saveAlbum" :disabled="selectedRating < 1 || saving">
+                    <button @click="saveAlbum" :disabled="selectedRating < 1 || saving"
+                        class="flex-1 border border-black bg-blue text-white px-4 py-2 text-sm font-bold uppercase hover:bg-black transition-colors disabled:opacity-50">
                         Save
                     </button>
                 </div>
