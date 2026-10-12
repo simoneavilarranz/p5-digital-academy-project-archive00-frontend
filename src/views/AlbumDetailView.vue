@@ -98,7 +98,7 @@ async function archiveAlbum() {
                         Archive
                     </button>
                 </div>
-                <p v-if="message" class="mt-2 text-xs text-center text-blue">
+                <p v-if="message" class="mt-2 text-lg text-center text-blue">
                     {{ message }}
                 </p>
                 <p v-else-if="!authStore.isAuthenticated" class="mt-4 text-lg text-gray-500 text-center">
