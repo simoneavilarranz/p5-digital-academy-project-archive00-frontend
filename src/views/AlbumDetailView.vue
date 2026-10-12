@@ -1,6 +1,7 @@
 <script setup>
 import TrackList from '@/components/catalog/TrackList.vue';
 import { catalogService } from '@/services/catalogService';
+import { collectionService } from '@/services/collectionService';
 import { useAuthStore } from '@/stores/authStore';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
@@ -29,6 +30,32 @@ onMounted(async () => {
         loading.value = false
     }
 })
+
+async function saveAlbum() {
+    if (selectedRating.value < 1) return
+
+    saving.value = true
+    message.value = ''
+
+    try {
+        const response = await collectionService.add({
+            lastFmId: `${album.value.artist}/${album.value.name}`,
+            albumName: album.value.name,
+            artistName: album.value.artist,
+            coverUrl: album.value.imageUrl,
+            type: 'SAVED',
+            rating: selectedRating.value,
+        })
+        savedItem.value = response.data
+        showRatingModal.value = false
+        message.value = 'Album saved!'
+        selectedRating.value = 0
+    } catch (err) {
+        message.value = err.response?.data?.message || 'Error saving album.'
+    } finally {
+        saving.value = false
+    }
+}
 </script>
 <template>
     <div class="min-h-screen bg-white px-6 py-6 md:px-8 md:py-8">
