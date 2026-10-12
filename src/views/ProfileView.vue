@@ -1,4 +1,6 @@
 <script setup>
+import CollectionItem from '@/components/collection/CollectionItem.vue'
+import { RouterLink } from 'vue-router'
 import { collectionService } from '@/services/collectionService'
 import { userService } from '@/services/userService'
 import { computed, onMounted, ref } from 'vue'
@@ -34,5 +36,53 @@ onMounted(async () => {
 })
 </script>
 <template>
-    PROFILE
+    <div>
+        <p v-if="loading">Loading...</p>
+        <p v-else-if="error">{{ error }}</p>
+        <div v-else-if="user">
+            <div>
+                <div></div>
+                <h1>{{ user.username }}</h1>
+                <p>{{ user.email }}</p>
+                <RouterLink to="/settings">
+                    Settings
+                </RouterLink>
+                <div>
+                    <div>
+                        <p>Collection</p>
+                        <p>{{ savedItems.length }}</p>
+                    </div>
+                    <div>
+                        <p>Archive</p>
+                        <p>{{ archivedItems.length }}</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h2>Collection</h2>
+                    <RouterLink to="/profile/collection">
+                        View all →
+                    </RouterLink>
+                </div>
+
+                <div v-if="latestSaved.length > 0">
+                    <CollectionItem v-for="item in latestSaved" :key="item.id" :item="item" />
+                </div>
+                <p v-else>No albums saved yet.</p>
+            </div>
+            <div>
+                <div>
+                    <h2>Archive</h2>
+                    <RouterLink to="/profile/archive">
+                        View all →
+                    </RouterLink>
+                </div>
+                <div v-if="latestArchived.length > 0">
+                    <CollectionItem v-for="item in latestArchived" :key="item.id" :item="item" />
+                </div>
+                <p v-else>Archive is empty.</p>
+            </div>
+        </div>
+    </div>
 </template>
