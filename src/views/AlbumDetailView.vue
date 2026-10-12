@@ -87,21 +87,21 @@ async function archiveAlbum() {
         <div v-else-if="album" class="grid grid-cols-1 gap-8 md:grid-cols-3">
             <div class="md:col-span-1">
                 <img :src="album.imageUrl" :alt="album.name" class="w-full border border-black">
-                <div v-if="authStore.isAuthenticated">
-                    <button @click="showRatingModal = true" :disabled="saving">
-                        <img :src="addIcon" alt="">
+                <div v-if="authStore.isAuthenticated" class="mt-4 flex gap-2">
+                    <button @click="showRatingModal = true" :disabled="saving"
+                        class="w-full border border-black bg-white px-4 py-3 text-lg font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors disabled:opacity-50">
                         Save
                     </button>
-                    <button @click="archiveAlbum" :disabled="saving">
-                        <img :src="archiveIcon" alt="">
+                    <button @click="archiveAlbum" :disabled="saving"
+                        class="w-full border border-black bg-white px-4 py-3 text-lg font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors disabled:opacity-50">
                         Archive
                     </button>
                 </div>
-                <p v-if="message">
+                <p v-if="message" class="mt-2 text-xs text-center text-blue">
                     {{ message }}
                 </p>
-                <p v-else>
-                    <RouterLink to="/login">Log in</RouterLink> to save albums.
+                <p v-else class="mt-4 text-lg text-gray-500 text-center">
+                    <RouterLink to="/login" class="text-blue hover:underline">Log in</RouterLink> to save albums.
                 </p>
             </div>
             <div class="md:col-span-2">
