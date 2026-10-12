@@ -47,18 +47,18 @@ onMounted(async () => {
                     </span>
                 </div>
                 <h1 class="text-blue text-2xl font-bold mb-2">{{ user.username }}</h1>
-                <p class="text-sm text-gray-500 mb-4">{{ user.email }}</p>
+                <p class="text-lg text-gray-500 mb-4">{{ user.email }}</p>
                 <RouterLink to="/settings"
-                    class="block text-center border border-black bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors mb-6">
+                    class="block text-center border border-black bg-white px-4 py-2 text-md font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors mb-6">
                     Settings
                 </RouterLink>
                 <div class="grid grid-cols-2 gap-2">
                     <div class="border border-black p-3">
-                        <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Collection</p>
+                        <p class="text-sm text-gray-500 uppercase tracking-wide mb-1">Collection</p>
                         <p class="text-lg font-bold">{{ savedItems.length }}</p>
                     </div>
                     <div class="border border-black p-3">
-                        <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Archive</p>
+                        <p class="text-sm text-gray-500 uppercase tracking-wide mb-1">Archive</p>
                         <p class="text-lg font-bold">{{ archivedItems.length }}</p>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ onMounted(async () => {
             <div class="md:col-span-2">
                 <div class="mb-4 pb-2 flex justify-between items-baseline">
                     <h2 class="text-blue text-lg font-bold uppercase tracking-wide">Collection</h2>
-                    <RouterLink to="/profile/collection" class="text-xs text-gray-500 hover:text-blue">
+                    <RouterLink to="/profile/collection" class="text-sm text-gray-500 hover:text-blue">
                         View all →
                     </RouterLink>
                 </div>
@@ -78,7 +78,7 @@ onMounted(async () => {
             <div class="md:col-span-2">
                 <div class="mb-4 pb-2 flex justify-between items-baseline">
                     <h2 class="text-blue text-lg font-bold uppercase tracking-wide">Archive</h2>
-                    <RouterLink to="/profile/archive" class="text-xs text-gray-500 hover:text-blue">
+                    <RouterLink to="/profile/archive" class="text-sm text-gray-500 hover:text-blue">
                         View all →
                     </RouterLink>
                 </div>
