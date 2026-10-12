@@ -32,4 +32,41 @@ describe('CollectionItem', () => {
       global: { plugins: [router] },
     })
   })
+
+  it('renders the album name, artist and rating', () => {
+    expect(wrapper.text()).toContain('OK Computer')
+    expect(wrapper.text()).toContain('Radiohead')
+    expect(wrapper.text()).toContain('★')
+  })
+
+  it('links to the album detail', () => {
+    const link = wrapper.find('a')
+    expect(link.attributes('href')).toBe('/album/Radiohead/OK%20Computer')
+  })
+
+  it('renders the review text when present', () => {
+    expect(wrapper.text()).toContain('A masterpiece.')
+  })
+
+  it('does not render the remove button when removable is false', () => {
+    expect(wrapper.find('button').exists()).toBe(false)
+  })
+
+  it('renders the remove button when removable is true', () => {
+    const wrapperRemovable = mount(CollectionItem, {
+      props: { item: mockItem, removable: true },
+      global: { plugins: [router] },
+    })
+    expect(wrapperRemovable.find('button').exists()).toBe(true)
+  })
+
+  it('emits remove with the item id when clicking the remove button', async () => {
+    const wrapperRemovable = mount(CollectionItem, {
+      props: { item: mockItem, removable: true },
+      global: { plugins: [router] },
+    })
+    await wrapperRemovable.find('button').trigger('click')
+    expect(wrapperRemovable.emitted('remove')).toBeTruthy()
+    expect(wrapperRemovable.emitted('remove')[0]).toEqual([1])
+  })
 })
