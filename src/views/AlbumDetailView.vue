@@ -4,9 +4,7 @@ import { catalogService } from '@/services/catalogService';
 import { collectionService } from '@/services/collectionService';
 import { useAuthStore } from '@/stores/authStore';
 import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import addIcon from '../assets/addicon.svg'
-import archiveIcon from '../assets/archiveicon.svg'
+import { RouterLink, useRoute } from 'vue-router';
 
 const route = useRoute()
 const album = ref(null)
