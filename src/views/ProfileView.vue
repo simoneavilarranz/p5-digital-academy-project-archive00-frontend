@@ -39,8 +39,8 @@ onMounted(async () => {
     <div class="min-h-screen bg-white px-4 py-4 md:px-6 md:py-6">
         <p v-if="loading" class="text-center text-sm text-gray-500">Loading...</p>
         <p v-else-if="error" class="text-center text-sm text-red-600">{{ error }}</p>
-        <div v-else-if="user" class="mx-auto grid grid-cols-1 gap-6 md:grid-cols-5">
-            <div class="md:col-span-1">
+        <div v-else-if="user" class="mx-auto flex flex-col gap-6 md:flex-row md:h-[calc(100vh-8rem)]">
+            <div class="md:w-64">
                 <div class="w-32 h-32 border border-black bg-white flex items-center justify-center mb-4">
                     <span class="text-blue text-6xl font-bold uppercase">
                         {{ user.username.charAt(0) }}
@@ -63,24 +63,18 @@ onMounted(async () => {
                     </div>
                 </div>
             </div>
-            <div class="md:col-span-2">
+            <div class="flex-1 md:overflow-y-auto md:pr-6">
                 <div class="mb-4 pb-2 flex justify-between items-baseline">
                     <h2 class="text-blue text-lg font-bold uppercase tracking-wide">Collection</h2>
-                    <RouterLink to="/profile/collection" class="text-sm text-gray-500 hover:text-blue">
-                        View all →
-                    </RouterLink>
                 </div>
                 <div v-if="latestSaved.length > 0" class="border-t border-l border-r border-black">
                     <CollectionItem v-for="item in latestSaved" :key="item.id" :item="item" />
                 </div>
                 <p v-else class="text-xs text-gray-500 py-4">No albums saved yet.</p>
             </div>
-            <div class="md:col-span-2">
+            <div class="flex-1 md:overflow-y-auto">
                 <div class="mb-4 pb-2 flex justify-between items-baseline">
                     <h2 class="text-blue text-lg font-bold uppercase tracking-wide">Archive</h2>
-                    <RouterLink to="/profile/archive" class="text-sm text-gray-500 hover:text-blue">
-                        View all →
-                    </RouterLink>
                 </div>
                 <div v-if="latestArchived.length > 0" class="border-t border-l border-r border-black">
                     <CollectionItem v-for="item in latestArchived" :key="item.id" :item="item" />
