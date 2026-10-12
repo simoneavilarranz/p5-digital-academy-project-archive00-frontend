@@ -6,12 +6,18 @@ defineProps({
         type: Object,
         required: true,
     },
+    removable: {
+        type: Boolean,
+        default: false,
+    },
 })
+
+defineEmits(['remove'])
 </script>
 <template>
     <div class="flex items-center border-b border-black">
         <RouterLink :to="`/album/${encodeURIComponent(item.artistName)}/${encodeURIComponent(item.albumName)}`"
-            class="flex gap-4 border-b border-black px-4 py-4 hover:bg-gray-light transition-colors">
+            class="flex flex-1 gap-4 px-4 py-4 hover:bg-gray-light transition-colors min-w-0">
             <img :src="item.coverUrl" :alt="item.albumName"
                 class="w-20 h-20 border border-black bg-gray-medium shrink-0" />
             <div class="flex-1 min-w-0">
@@ -28,7 +34,8 @@ defineProps({
             </div>
         </RouterLink>
         <button v-if="removable" @click="$emit('remove', item.id)"
-            class="px-4 py-4 text-xs text-gray-500 hover:text-red-600 transition-colors" title="Remove from collection">
+            class="px-4 py-4 text-lg font-bold text-gray-500 hover:text-red-600 transition-colors"
+            title="Remove from collection">
             ✕
         </button>
     </div>

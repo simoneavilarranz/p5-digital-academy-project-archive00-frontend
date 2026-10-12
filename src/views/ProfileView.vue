@@ -34,6 +34,16 @@ onMounted(async () => {
         loading.value = false
     }
 })
+
+async function removeItem(id) {
+    try {
+        await collectionService.remove(id)
+        savedItems.value = savedItems.value.filter((item) => item.id !== id)
+        archivedItems.value = archivedItems.value.filter((item) => item.id !== id)
+    } catch (err) {
+        console.error('Error removing item:', err)
+    }
+}
 </script>
 <template>
     <div class="min-h-screen bg-white px-4 py-4 md:px-6 md:py-6">
@@ -68,7 +78,8 @@ onMounted(async () => {
                     <h2 class="text-blue text-lg font-bold uppercase tracking-wide">Collection</h2>
                 </div>
                 <div v-if="latestSaved.length > 0" class="border-t border-l border-r border-black">
-                    <CollectionItem v-for="item in latestSaved" :key="item.id" :item="item" />
+                    <CollectionItem v-for="item in latestSaved" :key="item.id" :item="item" :removable="true"
+                        @remove="removeItem" />
                 </div>
                 <p v-else class="text-xs text-gray-500 py-4">No albums saved yet.</p>
             </div>
@@ -77,7 +88,8 @@ onMounted(async () => {
                     <h2 class="text-blue text-lg font-bold uppercase tracking-wide">Archive</h2>
                 </div>
                 <div v-if="latestArchived.length > 0" class="border-t border-l border-r border-black">
-                    <CollectionItem v-for="item in latestArchived" :key="item.id" :item="item" />
+                    <CollectionItem v-for="item in latestArchived" :key="item.id" :item="item" :removable="true"
+                        @remove="removeItem" />
                 </div>
                 <p v-else class="text-xs text-gray-500 py-4">Archive is empty.</p>
             </div>
