@@ -3,7 +3,8 @@ import AlbumCard from '@/components/catalog/AlbumCard.vue';
 import ArtistCard from '@/components/catalog/ArtistCard.vue';
 import SearchBar from '@/components/catalog/SearchBar.vue';
 import { catalogService } from '@/services/catalogService';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const query = ref('')
 const searchTerm = ref('')
@@ -11,8 +12,24 @@ const results = ref(null)
 const loading = ref(false)
 const error = ref('')
 
+const route = useRoute()
+const router = useRouter()
+
+onMounted(async () => {
+    if (route.query.q) {
+        query.value = route.query.q
+        await performSearch()
+    }
+})
+
 async function handleSearch() {
     if (!query.value.trim()) return
+
+    router.push({ query: { q: query.value } })
+    await performSearch()
+}
+
+async function performSearch() {
     loading.value = true
     error.value = ''
 
@@ -54,17 +71,13 @@ const hasResults = computed(() => filteredResults.value.length > 0)
         <div class="mx-auto max-w-7xl">
             <h1 class="text-blue text-3xl md:text-5xl font-bold mb-2 text-center">WELCOME TO ARCHIVE_00</h1>
             <p class="text-sm text-gray-500 mb-8 text-center">Search for albums and artists.</p>
-
             <SearchBar v-model="query" placeholder="Start searching..." @submit="handleSearch" />
-
             <p v-if="loading" class="mt-8 text-center text-sm text-gray-500">
                 Searching...
             </p>
-
             <p v-else-if="error" class="mt-8 text-center text-sm text-red-600">
                 {{ error }}
             </p>
-
             <div v-else-if="results" class="mt-8">
                 <div class="flex justify-center gap-2 mb-8">
                     <button v-for="f in filters" :key="f.value" @click="filter = f.value" :class="[
@@ -76,7 +89,6 @@ const hasResults = computed(() => filteredResults.value.length > 0)
                         {{ f.label }}
                     </button>
                 </div>
-
                 <div v-if="hasResults" class="grid grid-cols-2 gap-0 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                     <template v-for="item in filteredResults">
                         <AlbumCard v-if="item.type === 'album'" :key="`album-${item.name}-${item.artist}`"
@@ -84,7 +96,6 @@ const hasResults = computed(() => filteredResults.value.length > 0)
                         <ArtistCard v-else :key="`artist-${item.name}`" :artist="item" />
                     </template>
                 </div>
-
                 <p v-else class="text-center text-sm text-gray-500 mt-8">
                     No results found for "{{ searchTerm }}".
                 </p>
