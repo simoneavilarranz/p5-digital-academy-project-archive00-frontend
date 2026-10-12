@@ -56,6 +56,27 @@ async function saveAlbum() {
         saving.value = false
     }
 }
+
+async function archiveAlbum() {
+    saving.value = true
+    message.value = ''
+
+    try {
+        const response = await collectionService.add({
+            lastFmId: `${album.value.artist}/${album.value.name}`,
+            albumName: album.value.name,
+            artistName: album.value.artist,
+            coverUrl: album.value.imageUrl,
+            type: 'ARCHIVE',
+        })
+        savedItem.value = response.data
+        message.value = 'Album archived!'
+    } catch (err) {
+        message.value = err.response?.data?.message || 'Error archiving album.'
+    } finally {
+        saving.value = false
+    }
+}
 </script>
 <template>
     <div class="min-h-screen bg-white px-6 py-6 md:px-8 md:py-8">
