@@ -81,7 +81,7 @@ async function removeItem(id) {
                     <CollectionItem v-for="item in latestSaved" :key="item.id" :item="item" :removable="true"
                         @remove="removeItem" />
                 </div>
-                <p v-else class="text-xs text-gray-500 py-4">No albums saved yet.</p>
+                <p v-else class="text-lg text-gray-500 py-4">No albums saved yet.</p>
             </div>
             <div class="flex-1 md:overflow-y-auto">
                 <div class="mb-4 pb-2 flex justify-between items-baseline">
@@ -91,7 +91,7 @@ async function removeItem(id) {
                     <CollectionItem v-for="item in latestArchived" :key="item.id" :item="item" :removable="true"
                         @remove="removeItem" />
                 </div>
-                <p v-else class="text-xs text-gray-500 py-4">Archive is empty.</p>
+                <p v-else class="text-lg text-gray-500 py-4">Archive is empty.</p>
             </div>
         </div>
     </div>
