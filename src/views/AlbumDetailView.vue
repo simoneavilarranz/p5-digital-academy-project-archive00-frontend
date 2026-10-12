@@ -103,7 +103,7 @@ async function archiveAlbum() {
                 <p v-if="message" class="mt-2 text-xs text-center text-blue">
                     {{ message }}
                 </p>
-                <p v-else class="mt-4 text-lg text-gray-500 text-center">
+                <p v-else-if="!authStore.isAuthenticated" class="mt-4 text-lg text-gray-500 text-center">
                     <RouterLink to="/login" class="text-blue hover:underline">Log in</RouterLink> to save albums.
                 </p>
             </div>
