@@ -41,7 +41,11 @@ onMounted(async () => {
         <p v-else-if="error" class="text-center text-sm text-red-600">{{ error }}</p>
         <div v-else-if="user" class="mx-auto grid grid-cols-1 gap-6 md:grid-cols-5">
             <div class="md:col-span-1">
-                <div class="w-32 h-32 border border-black bg-gray-medium mb-4"></div>
+                <div class="w-32 h-32 border border-black bg-white flex items-center justify-center mb-4">
+                    <span class="text-blue text-6xl font-bold uppercase">
+                        {{ user.username.charAt(0) }}
+                    </span>
+                </div>
                 <h1 class="text-blue text-2xl font-bold mb-2">{{ user.username }}</h1>
                 <p class="text-sm text-gray-500 mb-4">{{ user.email }}</p>
                 <RouterLink to="/settings"
@@ -66,7 +70,6 @@ onMounted(async () => {
                         View all →
                     </RouterLink>
                 </div>
-
                 <div v-if="latestSaved.length > 0" class="border-t border-l border-r border-black">
                     <CollectionItem v-for="item in latestSaved" :key="item.id" :item="item" />
                 </div>
