@@ -47,26 +47,40 @@ onMounted(async () => {
 })
 
 async function saveAlbum() {
-    if (selectedRating.value < 1) return
-
     saving.value = true
     message.value = ''
 
     try {
-        const response = await collectionService.add({
-            lastFmId: `${album.value.artist}/${album.value.name}`,
-            albumName: album.value.name,
-            artistName: album.value.artist,
-            coverUrl: album.value.imageUrl,
-            type: 'SAVED',
-            rating: selectedRating.value,
-            reviewText: reviewText.value.trim() || null,
-        })
-        savedItem.value = response.data
-        showRatingModal.value = false
-        message.value = 'Album saved!'
-        selectedRating.value = 0
-        reviewText.value = ''
+        if (existingItem.value) {
+            const response = await collectionService.updateReview(
+                existingItem.value.id,
+                reviewText.value.trim() || null
+            )
+            existingItem.value = response.data
+            showRatingModal.value = false
+            message.value = 'Review updated!'
+        } else {
+            if (selectedRating.value < 1) {
+                saving.value = false
+                return
+            }
+
+            const response = await collectionService.add({
+                lastFmId: `${album.value.artist}/${album.value.name}`,
+                albumName: album.value.name,
+                artistName: album.value.artist,
+                coverUrl: album.value.imageUrl,
+                type: 'SAVED',
+                rating: selectedRating.value,
+                reviewText: reviewText.value.trim() || null,
+            })
+            existingItem.value = response.data
+            savedItem.value = response.data
+            showRatingModal.value = false
+            message.value = 'Album saved!'
+            selectedRating.value = 0
+            reviewText.value = ''
+        }
     } catch (err) {
         message.value = err.response?.data?.message || 'Error saving album.'
     } finally {
