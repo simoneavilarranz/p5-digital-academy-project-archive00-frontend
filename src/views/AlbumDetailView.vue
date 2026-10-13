@@ -18,13 +18,27 @@ const reviewText = ref('')
 const saving = ref(false)
 const message = ref('')
 const savedItem = ref(null)
+const existingItem = ref(null)
 
 onMounted(async () => {
     const { artist, album: albumName } = route.params
 
     try {
-        const response = await catalogService.getAlbumDetails(artist, albumName)
-        album.value = response.data
+        const [albumRes, collectionRes] = await Promise.all([
+            catalogService.getAlbumDetails(artist, albumName),
+            authStore.isAuthenticated
+                ? collectionService.getMine()
+                : Promise.resolve({ data: [] }),
+        ])
+
+        album.value = albumRes.data
+
+        const lastFmId = `${album.value.artist}/${album.value.name}`
+        const existing = collectionRes.data.find((item) => item.lastFmId === lastFmId)
+
+        if (existing) {
+            existingItem.value = existing
+        }
     } catch (err) {
         error.value = err.response?.data?.message || 'Error loading album.'
     } finally {
