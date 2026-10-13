@@ -1,5 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
+
+const showFullReview = ref(false)
 
 defineProps({
     item: {
@@ -23,7 +26,7 @@ defineEmits(['remove'])
             <div class="flex-1 min-w-0">
                 <h3 class="text-lg font-bold truncate">{{ item.albumName }}</h3>
                 <p class="text-sm text-gray-500 truncate mb-1">{{ item.artistName }}</p>
-                <p v-if="item.reviewText" class="text-sm text-gray-700 line-clamp-2">
+                <p v-if="item.reviewText" class="text-sm text-gray-700 wrap-break-word">
                     {{ item.reviewText }}
                 </p>
             </div>
