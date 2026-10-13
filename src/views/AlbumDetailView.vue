@@ -197,7 +197,9 @@ async function removeFromCollection() {
         <div v-if="showRatingModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
             @click.self="showRatingModal = false">
             <div class="bg-white border border-black p-8 max-w-md w-full mx-4">
-                <h3 class="text-blue text-xl font-bold mb-6 text-center">Rate this album</h3>
+                <h3 class="text-blue text-xl font-bold mb-6 text-center">
+                    {{ existingItem ? 'Edit your review' : 'Rate this album' }}
+                </h3>
                 <div v-if="!existingItem" class="flex justify-center gap-2 mb-6">
                     <button v-for="n in 5" :key="n" @click="selectedRating = n" :class="[
                         'w-10 h-10 border border-black text-lg font-bold transition-colors',
@@ -207,7 +209,7 @@ async function removeFromCollection() {
                 </div>
                 <div class="mb-6">
                     <label for="review" class="block text-xs font-bold uppercase tracking-wide mb-2">
-                        Review (optional)
+                        {{ existingItem ? 'Review' : 'Review (optional)' }}
                     </label>
                     <textarea id="review" v-model="reviewText" rows="4" maxlength="1000"
                         placeholder="Write your thoughts about this album..."
