@@ -139,15 +139,42 @@ async function removeFromCollection() {
         <div v-else-if="album" class="grid grid-cols-1 gap-8 md:grid-cols-3">
             <div class="md:col-span-1">
                 <img :src="album.imageUrl" :alt="album.name" class="w-full border border-black">
-                <div v-if="authStore.isAuthenticated" class="mt-4 flex gap-2">
-                    <button @click="showRatingModal = true" :disabled="saving"
-                        class="w-full border border-black bg-white px-4 py-3 text-lg font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors disabled:opacity-50">
-                        Save
-                    </button>
-                    <button @click="archiveAlbum" :disabled="saving"
-                        class="w-full border border-black bg-white px-4 py-3 text-lg font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors disabled:opacity-50">
-                        Archive
-                    </button>
+                <div v-if="authStore.isAuthenticated" class="mt-4">
+                    <div v-if="existingItem" class="flex flex-col gap-2">
+                        <div class="flex flex-col border border-black p-3 gap-1">
+                            <p class="text-sm text-gray-500 uppercase tracking-wide">Your rating</p>
+                            <div class="text-lg">
+                                <span v-for="n in 5" :key="n"
+                                    :class="n <= existingItem.rating ? 'text-blue' : 'text-gray-300'">
+                                    ★
+                                </span>
+                            </div>
+                            <template v-if="existingItem.reviewText">
+                                <p class="text-sm text-gray-500 uppercase tracking-wide mt-2">Your review</p>
+                                <p class="text-sm whitespace-pre-line wrap-break-word">{{ existingItem.reviewText }}</p>
+                            </template>
+                        </div>
+                        <div class="flex gap-2">
+                            <button @click="openEditModal" :disabled="saving"
+                                class="w-full border border-black bg-white px-4 py-3 text-lg font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors disabled:opacity-50">
+                                Edit Review
+                            </button>
+                            <button @click="removeFromCollection" :disabled="saving"
+                                class="w-full border border-black bg-white px-4 py-3 text-lg font-bold uppercase tracking-wide hover:bg-black hover:text-white transition-colors disabled:opacity-50">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                    <div v-else class="flex gap-2">
+                        <button @click="showRatingModal = true" :disabled="saving"
+                            class="w-full border border-black bg-white px-4 py-3 text-lg font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors disabled:opacity-50">
+                            Save
+                        </button>
+                        <button @click="archiveAlbum" :disabled="saving"
+                            class="w-full border border-black bg-white px-4 py-3 text-lg font-bold uppercase tracking-wide hover:bg-blue hover:text-white transition-colors disabled:opacity-50">
+                            Archive
+                        </button>
+                    </div>
                 </div>
                 <p v-if="message" class="mt-2 text-lg text-center text-blue">
                     {{ message }}
