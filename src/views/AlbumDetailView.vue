@@ -100,6 +100,23 @@ function openEditModal() {
     selectedRating.value = existingItem.value.rating || 0
     showRatingModal.value = true
 }
+
+async function removeFromCollection() {
+    if (!existingItem.value) return
+
+    saving.value = true
+    message.value = ''
+
+    try {
+        await collectionService.remove(existingItem.value.id)
+        existingItem.value = null
+        message.value = 'Removed from collection.'
+    } catch (err) {
+        message.value = err.response?.data?.message || 'Error removing album.'
+    } finally {
+        saving.value = false
+    }
+}
 </script>
 <template>
     <div class="min-h-screen bg-white px-6 py-6 md:px-8 md:py-8">
