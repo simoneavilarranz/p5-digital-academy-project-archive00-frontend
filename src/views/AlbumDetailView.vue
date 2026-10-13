@@ -198,7 +198,7 @@ async function removeFromCollection() {
             @click.self="showRatingModal = false">
             <div class="bg-white border border-black p-8 max-w-md w-full mx-4">
                 <h3 class="text-blue text-xl font-bold mb-6 text-center">Rate this album</h3>
-                <div class="flex justify-center gap-2 mb-6">
+                <div v-if="!existingItem" class="flex justify-center gap-2 mb-6">
                     <button v-for="n in 5" :key="n" @click="selectedRating = n" :class="[
                         'w-10 h-10 border border-black text-lg font-bold transition-colors',
                         selectedRating >= n ? 'bg-blue text-white' : 'bg-white text-black hover:bg-gray-100',]">
