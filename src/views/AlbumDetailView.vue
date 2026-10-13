@@ -94,6 +94,12 @@ async function archiveAlbum() {
         saving.value = false
     }
 }
+
+function openEditModal() {
+    reviewText.value = existingItem.value.reviewText || ''
+    selectedRating.value = existingItem.value.rating || 0
+    showRatingModal.value = true
+}
 </script>
 <template>
     <div class="min-h-screen bg-white px-6 py-6 md:px-8 md:py-8">
