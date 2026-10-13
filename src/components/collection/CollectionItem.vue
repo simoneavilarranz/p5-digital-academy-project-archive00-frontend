@@ -27,7 +27,7 @@ defineEmits(['remove'])
                 <h3 class="text-lg font-bold truncate">{{ item.albumName }}</h3>
                 <p class="text-sm text-gray-500 truncate mb-1">{{ item.artistName }}</p>
                 <div v-if="item.reviewText" class="text-sm text-gray-700">
-                    <p :class="showFullReview ? '' : 'line-clamp-2'" class="wrap-break-words">
+                    <p :class="showFullReview ? '' : 'line-clamp-1'" class="break-all">
                         {{ item.reviewText }}
                     </p>
                     <button v-if="item.reviewText.length > 100" @click.prevent="showFullReview = !showFullReview"
