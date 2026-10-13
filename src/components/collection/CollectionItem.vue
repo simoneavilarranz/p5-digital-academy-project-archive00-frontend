@@ -26,9 +26,15 @@ defineEmits(['remove'])
             <div class="flex-1 min-w-0">
                 <h3 class="text-lg font-bold truncate">{{ item.albumName }}</h3>
                 <p class="text-sm text-gray-500 truncate mb-1">{{ item.artistName }}</p>
-                <p v-if="item.reviewText" class="text-sm text-gray-700 wrap-break-word">
-                    {{ item.reviewText }}
-                </p>
+                <div v-if="item.reviewText" class="text-sm text-gray-700">
+                    <p :class="showFullReview ? '' : 'line-clamp-2'" class="wrap-break-words">
+                        {{ item.reviewText }}
+                    </p>
+                    <button v-if="item.reviewText.length > 100" @click.prevent="showFullReview = !showFullReview"
+                        class="text-xs text-blue hover:underline mt-1 font-bold uppercase tracking-wide">
+                        {{ showFullReview ? 'Hide' : 'Show more' }}
+                    </button>
+                </div>
             </div>
             <div v-if="item.rating" class="shrink-0 text-md">
                 <span v-for="n in 5" :key="n" :class="n <= item.rating ? 'text-blue' : 'text-gray-300'">
