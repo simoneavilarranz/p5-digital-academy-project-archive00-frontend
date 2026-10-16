@@ -26,7 +26,7 @@ apiClient.interceptors.response.use(
 
       if (authStore.isAuthenticated) {
         authStore.logout()
-        window.location.href = '/login'
+        window.location.href = '/login?expired=true'
       }
     }
 
