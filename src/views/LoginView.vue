@@ -3,8 +3,8 @@ import FormInput from '@/components/common/FormInput.vue'
 import PasswordInput from '@/components/common/PasswordInput.vue'
 import { authService } from '@/services/authService'
 import { useAuthStore } from '@/stores/authStore'
-import { ref } from 'vue'
-import { useRouter, RouterLink } from 'vue-router'
+import { computed, ref } from 'vue'
+import { useRouter, RouterLink, useRoute } from 'vue-router'
 
 const form = ref({
     email: '',
@@ -15,6 +15,9 @@ const error = ref('')
 
 const router = useRouter()
 const authStore = useAuthStore()
+
+const route = useRoute()
+const sessionExpired = computed(() => route.query.expired === 'true')
 
 async function handleSubmit() {
     error.value = ''
@@ -47,6 +50,9 @@ async function handleSubmit() {
                 <FormInput id="email" label="Email" type="email" v-model="form.email"
                     placeholder="example@archive.com" />
                 <PasswordInput id="password" label="Password" v-model="form.password" />
+                <p v-if="sessionExpired" class="text-center text-sm text-red-600 mb-4">
+                    Session expired. Please, log in again.
+                </p>
                 <p v-if="error" class="text-red-600 text-xs text-center mb-4">{{ error }}</p>
                 <button type="submit"
                     class="w-full bg-blue text-white px-4 py-3 text-sm font-bold uppercase hover:bg-black transition-colors">
